@@ -1,8 +1,10 @@
 function solution(s){
+  let str = s.toLowerCase();
   let x = 0, y = 0;
-  s = s.split("").filter((el) => {
-    if(el === 'p' || el === 'P') x++;
-    else if(el === 'y' || el === 'Y') y++;
+  str = str.split("").filter((el) => {
+    el === 'p' ? x++
+               : el === 'y' ? y++
+                            : el
   })  
   return x === y;
 }
