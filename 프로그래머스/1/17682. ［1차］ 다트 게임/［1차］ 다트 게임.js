@@ -1,3 +1,4 @@
+// 풀이 1.
 function solution(dartResult) {
   const toArray = dartResult.split("");
   const region = {
@@ -34,4 +35,29 @@ function solution(dartResult) {
     return acc + cur;
     return acc;
   }, 0);
+}
+
+// 풀이 2
+function solution(dartResult) {
+  const region = ["S", "D", "T"];
+  let score = "";
+  const result = [];
+
+  for (let i = 0; i < dartResult.length; i++) {
+    if (!isNaN(Number(dartResult[i]))) score += dartResult[i];
+    else if (region.includes(dartResult[i])) {
+      result.push(Math.pow(Number(score), region.indexOf(dartResult[i]) + 1));
+      score = "";
+    } else {
+      if (dartResult[i] === "#")
+        result[result.length - 1] = -result[result.length - 1];
+      else {
+        result[result.length - 1] = result[result.length - 1] * 2;
+        if (result.length > 1) {
+          result[result.length - 2] = result[result.length - 2] * 2;
+        }
+      }
+    }
+  }
+  return result.reduce((acc, cur) => acc + cur);
 }
